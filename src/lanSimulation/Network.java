@@ -174,7 +174,7 @@ which should be treated by all nodes.
 		Packet packet = new Packet("BROADCAST", firstNode_.name_, firstNode_.name_);
 		do {
 			try {
-				logging(report, currentNode);
+				currentNode.logging(report, this);
 			} catch (IOException exc) {
 				// just ignore
 			};
@@ -188,13 +188,6 @@ which should be treated by all nodes.
 		};
 		return true;
 	}
-
-	private void logging(Writer report, Node currentNode) throws IOException {
-		report.write("\tNode '");
-		report.write(currentNode.name_);
-		report.write("' passes packet on.\n");
-		report.flush();
-	}    
 
 	/**
 The #receiver is requested by #workstation to print #document on #printer.
@@ -230,7 +223,7 @@ Therefore #receiver sends a packet across the token ring network, until either
 		startNode = (Node) workstations_.get(workstation);
 
 		try {
-			logging(report, startNode);
+			startNode.logging(report, this);
 		} catch (IOException exc) {
 			// just ignore
 		};
@@ -238,7 +231,7 @@ Therefore #receiver sends a packet across the token ring network, until either
 		while ((! packet.destination_.equals(currentNode.name_))
 				& (! packet.origin_.equals(currentNode.name_))) {
 			try {
-				logging(report, currentNode);
+				currentNode.logging(report, this);
 			} catch (IOException exc) {
 				// just ignore
 			};
