@@ -86,13 +86,9 @@ Workstation Filip [Workstation] -> Node n1 [Node] -> Workstation Hans [Workstati
 
 ---------------------------------SCENARIO: Broadcast Success -----------------
 Broadcast Request
-	Node 'Filip' accepts broadcase packet.
 	Node 'Filip' passes packet on.
-	Node 'n1' accepts broadcase packet.
 	Node 'n1' passes packet on.
-	Node 'Hans' accepts broadcase packet.
 	Node 'Hans' passes packet on.
-	Node 'Andy' accepts broadcase packet.
 	Node 'Andy' passes packet on.
 >>> Broadcast travelled whole token ring.
 
