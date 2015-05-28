@@ -275,12 +275,12 @@ Therefore #receiver sends a packet across the token ring network, until either
 					startPos = document.message_.indexOf("author:");
 					if (startPos >= 0) {
 						endPos = document.message_.indexOf(".", startPos + 7);
-						if (endPos < 0) {endPos = document.message_.length();};
+						endPos = accounting(document, endPos);
 						author = document.message_.substring(startPos + 7, endPos);};
 						startPos = document.message_.indexOf("title:");
 						if (startPos >= 0) {
 							endPos = document.message_.indexOf(".", startPos + 6);
-							if (endPos < 0) {endPos = document.message_.length();};
+							endPos = accounting(document, endPos);
 							title = document.message_.substring(startPos + 6, endPos);};
 							report.write("\tAccounting -- author = '");
 							report.write(author);
@@ -314,6 +314,11 @@ Therefore #receiver sends a packet across the token ring network, until either
 			};
 			return false;
 		}
+	}
+
+	private int accounting(Packet document, int endPos) {
+		if (endPos < 0) {endPos = document.message_.length();};
+		return endPos;
 	}
 
 	/**
