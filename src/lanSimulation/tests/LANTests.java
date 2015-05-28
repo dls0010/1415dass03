@@ -23,6 +23,7 @@ import lanSimulation.internals.*;
 import lanSimulation.*;
 import junit.framework.*;
 import junit.extensions.*;
+
 import java.lang.AssertionError;
 import java.io.*;
 
@@ -248,11 +249,15 @@ the tests should work as expected.
 	public void test() {
 	    Network network = Network.DefaultExample();
 	    StringWriter report = new StringWriter(100);
-	    network.requestWorkstationPrintsDocument("UnknownWorkstation",
-					      "does not matter", "does not matter", report);
+	    try{
+	    	network.requestWorkstationPrintsDocument("UnknownWorkstation",
+				      "does not matter", "does not matter", report);
+	    	fail("Exception not thrown");
+	    }
+	    catch(AssertionError e){
+	    	
+	    }
 	}
-
-  
     
 /*    public void testPreconditionViolation() {
         PreconditionViolationTestCase test= new PreconditionViolationTestCase("test", AssertionError.class);
