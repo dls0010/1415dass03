@@ -257,7 +257,56 @@ Therefore #receiver sends a packet across the token ring network, until either
 		if (endPos < 0) {endPos = document.message_.length();};
 		return endPos;
 	}
+	/**
+	Write a HTML representation of #receiver on the given #buf.
+	 <p><strong>Precondition:</strong> isInitialized();</p>
+		 */
+		public void printHTMLOn (StringBuffer buf) {
+			assert isInitialized();
 
+			buf.append("<HTML>\n<HEAD>\n<TITLE>LAN Simulation</TITLE>\n</HEAD>\n<BODY>\n<H1>LAN SIMULATION</H1>");
+			Node currentNode = firstNode_;
+			buf.append("\n\n<UL>");
+			do {
+				buf.append("\n\t<LI> ");
+				currentNode.printHTMLOn(buf, this);
+				buf.append(" </LI>");
+				currentNode = currentNode.nextNode_;
+			} while (currentNode != firstNode_);
+			buf.append("\n\t<LI>...</LI>\n</UL>\n\n</BODY>\n</HTML>\n");
+		}
+
+	/**
+	Write an XML representation of #receiver on the given #buf.
+	<p><strong>Precondition:</strong> isInitialized();</p>
+		 */
+		public void printXMLOn (StringBuffer buf) {
+			assert isInitialized();
+
+			Node currentNode = firstNode_;
+			buf.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n\n<network>");
+			do {
+				buf.append("\n\t");
+				currentNode.printXMLOn(buf, this);
+				currentNode = currentNode.nextNode_;
+			} while (currentNode != firstNode_);
+			buf.append("\n</network>");
+		}
+
+	/**
+		Write a printable representation of #receiver on the given #buf.
+		<p><strong>Precondition:</strong> isInitialized();</p>
+			 */
+	public void printOn (StringBuffer buf) {
+		assert isInitialized();
+		Node currentNode = firstNode_;
+		do {
+			currentNode.printHTMLOn(buf, this);
+			buf.append(" -> ");
+			currentNode = currentNode.nextNode_;
+		} while (currentNode != firstNode_);
+		buf.append(" ... ");
+	}
 	/**
 Return a printable representation of #receiver.
  <p><strong>Precondition:</strong> isInitialized();</p>
@@ -265,7 +314,7 @@ Return a printable representation of #receiver.
 	public String toString () {
 		assert isInitialized();
 		StringBuffer buf = new StringBuffer(30 * workstations_.size());
-		firstNode_.printOn(this, buf);
+		printOn(buf);
 		return buf.toString();
 	}
 
