@@ -141,8 +141,6 @@ public class LANTests extends TestCase {
         Node node;
 
     	node = new Node(Node.NODE, "n");
-        assertEquals("type_",
-            node.type_, Node.NODE);
         assertEquals("name_",
             node.name_, "n");
         assertEquals("nextNode_",
@@ -258,6 +256,8 @@ the tests should work as expected.
 	    	
 	    }
 	}
+
+  
     
 /*    public void testPreconditionViolation() {
         PreconditionViolationTestCase test= new PreconditionViolationTestCase("test", AssertionError.class);
