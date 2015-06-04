@@ -42,11 +42,7 @@ public class Node {
     A node with type PRINTER may accept packages to be printed.
 	 */
 	public static final byte PRINTER = 2;
-
-	/**
-    Holds the type of the Node.
-	 */
-	public byte type_;
+	
 	/**
     Holds the name of the Node.
 	 */
